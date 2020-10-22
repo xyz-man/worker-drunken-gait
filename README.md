@@ -17,9 +17,9 @@
 
 * Automatic fill the needed initial variables.
 * Separate configuration file.
-* The number of workers (_NUMBER_OF_WORKERS_), the number of dimensions (_NUMBER_OF_DIMENSIONS_) has no limitations 
-* Has the ability to set different values of motion probabilities.
-* Has the ability to set different values for movement shifts - **STEP_SIZE**.
+* The number of workers (_NUMBER_OF_WORKERS_), the number of dimensions (_NUMBER_OF_DIMENSIONS_) have no limitations 
+* The ability to set different values of motion probabilities.
+* The ability to set different values for movement shifts - **STEP_SIZE**.
 * The plotting function is only available for a **2-D** task.
 
 ## Installation
