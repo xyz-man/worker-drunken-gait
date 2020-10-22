@@ -9,7 +9,8 @@
 
 ## Description
 
-**[worker-drunken-gait] The program creates an array of movements of positions of a given number of workers and builds a
+**Worker-drunken-gait** - the program creates an array of movements of positions of a given number of workers and
+ builds a
  graph. 
 
 
@@ -17,9 +18,9 @@
 
 * Automatic fill the needed initial variables.
 * Separate configuration file.
-* The number of workers (_NUMBER_OF_WORKERS_), the number of dimensions (_NUMBER_OF_DIMENSIONS_) has no limitations 
-* Has the ability to set different values of motion probabilities.
-* Has the ability to set different values for movement shifts - **STEP_SIZE**.
+* The number of workers (_NUMBER_OF_WORKERS_), the number of dimensions (_NUMBER_OF_DIMENSIONS_) have no limitations 
+* The ability to set different values of motion probabilities.
+* The ability to set different values for movement shifts - **STEP_SIZE**.
 * The plotting function is only available for a **2-D** task.
 
 ## Installation
@@ -38,9 +39,7 @@ or simple way to create subfolder venv (with python packages) inside the current
     $ mkdir app && cd app
     
     
-    $ git clone https://github.com/xyz-man/feff_find_best_fit.git
-        or
-    $ git clone -b develop https://github.com/xyz-man/feff_find_best_fit.git
+    $ git clone https://github.com/xyz-man/worker-drunken-gait.git
 
 ### 3. Install requirements
 
@@ -53,7 +52,7 @@ Edit the `settings.py` file and change needed values.
       
 ### 5. Run
 
-Inside the root project directory (`.feff_find_best_fit/`) activate local virtual environments:
+Inside the root project directory (`.app/`) activate local virtual environments:
 
     $ source venv/bin/activate
     
