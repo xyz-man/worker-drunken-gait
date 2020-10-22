@@ -15,7 +15,7 @@ EXECUTIVE_NUMBER_OF_STEPS = 100
 # [x, y, z]
 STEP_SIZE = [1, 0.5, 0.75]
 
-NUMBER_OF_WORKERS = 1
+NUMBER_OF_WORKERS = 10
 
 NUMBER_OF_DIMENSIONS = 2
 
@@ -24,6 +24,7 @@ NUMBER_OF_DIMENSIONS = 2
 #  = [0.5, 0.4, 0.8]
 # if probability is 0.3 it specifies that new_coordinate = coordinate - step_size will occur in 30% of cases
 # and  new_coordinate = coordinate + step_size will occur in 70% cases
+
 DICTIONARY_OF_PROBABILITY_OF_MOTION = {
     1: [0.3, 0.7, 0.5],
     2: [0.5, 0.4, 0.8],
@@ -36,11 +37,14 @@ DICTIONARY_OF_INITIAL_COORDINATES = {
     3: [-1, -1, -1],
 }
 
+# if NUMBER_OF_WORKERS will be greater than the length of DICTIONARY_OF_PROBABILITY_OF_MOTION or
+# DICTIONARY_OF_INITIAL_COORDINATES then new DICTIONARIES will be created with randomly generated values
+
 # Set the logger level:
-LOGGER_LEVEL = "WARNING"
-# LOGGER_LEVEL = "ERROR"
-LOGGER_LEVEL = "DEBUG"
-LOGGER_LEVEL = "INFO"
+# LOGGER_LEVEL = "WARNING"
+LOGGER_LEVEL = "ERROR"
+# LOGGER_LEVEL = "DEBUG"
+# LOGGER_LEVEL = "INFO"
 
 # Set DEBUG_MODE to True and LOGGER_LEVEL = "DEBUG" with special logger functions will be set automatically
 DEBUG_MODE = True

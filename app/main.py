@@ -1,16 +1,22 @@
-# This is a sample Python script.
+'''
+* Created by Zhenia Syryanyy (Yevgen Syryanyy)
+* e-mail: yuginboy@gmail.com
+* Last modified: 23.10.2020
+'''
+from loguru import logger
+import matplotlib.pyplot as plt
+from pkg_lib.class_workers import MultiWorkers
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+def main():
+    obj = MultiWorkers()
+    obj.create_dict_of_workers()
+    obj.move_workers()
+    obj.plot_2d_workers()
+    plt.legend()
+    plt.show()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
+    main()

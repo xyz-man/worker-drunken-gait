@@ -10,6 +10,7 @@ import prettytable as pt
 import os, sys
 from pathlib import Path
 from pkg_utils.dir_and_file_operations import create_data_folder
+import numpy as np
 
 
 def check_if_all_in_list_are_none(list_of_elem):
@@ -101,6 +102,23 @@ class Configuration:
                        diagnose=True,
                        level=0)
 
+        # generate origin parameters if Dictionaries do not have equal length
+        if (cls.NUMBER_OF_WORKERS > len(cls.DICTIONARY_OF_INITIAL_COORDINATES)) or \
+                cls.NUMBER_OF_WORKERS > len(cls.DICTIONARY_OF_PROBABILITY_OF_MOTION):
+            cls.generate_random_values_of_probability_and_coordinate_dicts()
+
+        if len(cls.DICTIONARY_OF_INITIAL_COORDINATES) != \
+                len(cls.DICTIONARY_OF_PROBABILITY_OF_MOTION):
+            cls.generate_random_values_of_probability_and_coordinate_dicts()
+
+        if cls.NUMBER_OF_DIMENSIONS > len(cls.DICTIONARY_OF_PROBABILITY_OF_MOTION[1]):
+            cls.generate_random_values_of_probability_and_coordinate_dicts()
+
+        if cls.NUMBER_OF_DIMENSIONS > len(cls.STEP_SIZE):
+            cls.STEP_SIZE = list(np.round(
+                np.random.uniform(low=-1, high=1, size=cls.NUMBER_OF_DIMENSIONS),
+                1))
+
     @classmethod
     def init_folders(cls):
         '''
@@ -122,6 +140,22 @@ class Configuration:
         cls.LOG_DIR = log_path
 
     @classmethod
+    def generate_random_values_of_probability_and_coordinate_dicts(cls):
+        cls.DICTIONARY_OF_PROBABILITY_OF_MOTION = None
+        cls.DICTIONARY_OF_PROBABILITY_OF_MOTION = {}
+
+        cls.DICTIONARY_OF_INITIAL_COORDINATES = None
+        cls.DICTIONARY_OF_INITIAL_COORDINATES = {}
+
+        for idx_workers in range(cls.NUMBER_OF_WORKERS):
+            cls.DICTIONARY_OF_PROBABILITY_OF_MOTION[idx_workers+1] = list(np.round(np.random.rand(
+                cls.NUMBER_OF_DIMENSIONS), 2))
+
+            cls.DICTIONARY_OF_INITIAL_COORDINATES[idx_workers + 1] = list(np.round(
+                np.random.uniform(low=-5, high=5, size=cls.NUMBER_OF_DIMENSIONS),
+                1))
+
+    @classmethod
     def show_properties(cls):
         print_object_properties_value_in_table_form(cls)
 
@@ -131,4 +165,6 @@ Configuration.init()
 
 if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
+    Configuration.show_properties()
+    Configuration.generate_random_values_of_probability_and_coordinate_dicts()
     Configuration.show_properties()

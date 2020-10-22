@@ -11,6 +11,10 @@ import matplotlib.pyplot as plt
 
 
 class Dimension(BaseObject):
+    '''
+    Base class for dimension. It has a special property that generates new coordinates from origin coordinates using
+    information about motion probabilities
+    '''
     def __init__(self):
         self.name = None
         self.probability = None
@@ -65,8 +69,8 @@ class Dimension(BaseObject):
             nm=self.name,
             rnd=round(rnd_val, 4),
             sn=sgn,
-            before=self.coordinate,
-            after=self.coordinate + sgn * self.step_size,
+            before=round(self.coordinate, 3),
+            after=round(self.coordinate + sgn * self.step_size, 3),
         )
         )
         self.coordinate = self.coordinate + sgn * self.step_size
