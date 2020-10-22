@@ -12,6 +12,15 @@ from pathlib import Path
 from pkg_utils.dir_and_file_operations import create_data_folder
 
 
+def check_if_all_in_list_are_none(list_of_elem):
+    """ Check if all elements in list are None """
+    result = True
+    for elem in list_of_elem:
+        if elem is not None:
+            return False
+    return result
+
+
 def print_object_properties_value_in_table_form(obj):
     table = pt.PrettyTable([
         'Name',
@@ -53,8 +62,11 @@ class Configuration:
     NUMBER_OF_DIMENSIONS = NUMBER_OF_DIMENSIONS
     DICTIONARY_OF_PROBABILITY_OF_MOTION = DICTIONARY_OF_PROBABILITY_OF_MOTION
     DICTIONARY_OF_INITIAL_COORDINATES = DICTIONARY_OF_INITIAL_COORDINATES
+    STEP_SIZE = STEP_SIZE
     LOGGER_LEVEL = LOGGER_LEVEL
     FORMAT = "{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}"
+    MARKERS = ['o', '.', ',', 'x', '+', 'v', '^', '<', '>', 's', 'd']
+    MARKER_SIZE = 10
 
     @classmethod
     def init(cls):
@@ -73,15 +85,20 @@ class Configuration:
                        enqueue=True,
                        filter=custom_filter,
                        format=cls.FORMAT,
+                       backtrace=True, diagnose=True,
                        level=0)
             logger.add(sys.stdout,
                        format=cls.FORMAT,
                        # enqueue=True,
                        filter=custom_filter,
+                       backtrace=True,
+                       diagnose=True,
                        level="DEBUG")
         else:
             logger.add(os.path.join(cls.LOG_DIR, "logger.log"), enqueue=True, filter=custom_filter,
                        format=cls.FORMAT,
+                       backtrace=True,
+                       diagnose=True,
                        level=0)
 
     @classmethod

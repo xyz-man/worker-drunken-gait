@@ -13,14 +13,15 @@ class TestSingleWorker(unittest.TestCase):
     def init_defaults_2d() -> None:
         Configuration.NUMBER_OF_DIMENSIONS = 2
         Configuration.DICTIONARY_OF_PROBABILITY_OF_MOTION = {
-            '1': [0.3, 0.7],
-            '2': [0.5, 0.4],
+            1: [0.3, 0.7],
+            2: [0.5, 0.4],
         }
 
         Configuration.DICTIONARY_OF_INITIAL_COORDINATES = {
-            '1': [1, 1],
-            '2': [0, 0],
+            1: [1, 1],
+            2: [0, 0],
         }
+        Configuration.STEP_SIZE = [1, 0.5]
 
     def test_create_dict_of_worker_dimensions(self):
         self.init_defaults_2d()
@@ -35,6 +36,13 @@ class TestSingleWorker(unittest.TestCase):
         self.assertEqual(tmp_obj[1].probability, 0.7, "Should be 0.7")
 
         print('end')
+
+    def test_create_worker_by_id(self):
+        self.init_defaults_2d()
+        obj = SingleWorker()
+        self.assertEqual(obj.create_worker_by_id(idx=3), None, "Should be None")
+        self.assertEqual(obj.create_worker_by_id(idx=1)[0].name, 'x', "Should be x")
+        self.assertEqual(obj.create_worker_by_id(idx=2)[1].name, 'y', "Should be y")
 
 
 if __name__ == '__main__':
