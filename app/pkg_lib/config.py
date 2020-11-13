@@ -3,13 +3,13 @@
 * e-mail: yuginboy@gmail.com
 * Last modified: 19.10.2020
 '''
-from settings import *
+from app.settings import *
 from loguru import logger
 from loguru._defaults import env
 import prettytable as pt
 import os, sys
 from pathlib import Path
-from pkg_utils.dir_and_file_operations import create_data_folder
+from app.pkg_utils.dir_and_file_operations import create_data_folder
 import numpy as np
 
 

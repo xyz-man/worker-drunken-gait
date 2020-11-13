@@ -5,7 +5,7 @@
 '''
 from loguru import logger
 import matplotlib.pyplot as plt
-from pkg_lib.class_workers import MultiWorkers
+from app.pkg_lib.class_workers import MultiWorkers
 
 
 def main():

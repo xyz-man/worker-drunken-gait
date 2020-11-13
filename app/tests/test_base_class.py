@@ -4,8 +4,8 @@
 * Last modified: 19.10.2020
 '''
 import unittest
-from pkg_lib.config import Configuration
-from pkg_lib.base_class import SingleWorker
+from app.pkg_lib.config import Configuration
+from app.pkg_lib.base_class import SingleWorker
 
 
 class TestSingleWorker(unittest.TestCase):

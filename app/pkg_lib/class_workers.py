@@ -4,11 +4,11 @@
 * Last modified: 22.10.2020
 '''
 from loguru import logger
-from pkg_lib.config import BaseObject, Configuration, check_if_all_in_list_are_none
+from .config import BaseObject, Configuration, check_if_all_in_list_are_none
 from collections import OrderedDict as Odict
 import numpy as np
 import matplotlib.pyplot as plt
-from pkg_lib.base_class import SingleWorker
+from .base_class import SingleWorker
 
 
 class MultiWorkers(BaseObject):
