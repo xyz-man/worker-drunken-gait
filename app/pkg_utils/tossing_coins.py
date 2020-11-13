@@ -48,7 +48,7 @@ class MultiCoin:
         self.number_of_tossing_steps = 1000
         self.array_of_result_coins_side = []
         self._x_function = None
-        self._pdf = None
+        self._pmf = None
         self._cdf = None
 
     def tossing(self):
@@ -80,20 +80,20 @@ class MultiCoin:
             table.add_row(val_lst)
         print(table)
 
-    def get_pdf_and_cdf(self):
+    def get_pmf_and_cdf(self):
         unique, counts = np.unique(np.sort(self.get_x_function()), return_counts=True)
         self._x_function = unique
-        self._pdf = counts/self.number_of_tossing_steps
-        self._cdf = np.cumsum(self._pdf)
-        return self._pdf, self._cdf
+        self._pmf = counts / self.number_of_tossing_steps
+        self._cdf = np.cumsum(self._pmf)
+        return self._pmf, self._cdf
 
     def plot(self):
-        y_pdf, y_cdf = self.get_pdf_and_cdf()
+        y_pmf, y_cdf = self.get_pmf_and_cdf()
         x = self._x_function
         color = np.random.rand(3)
-        plt.plot(x, y_pdf, 'o',
+        plt.plot(x, y_pmf, 'o',
                  color=color,
-                 label='pdf',
+                 label='pmf',
                  )
 
         color = np.random.rand(3)
