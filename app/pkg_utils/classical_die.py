@@ -27,8 +27,8 @@ def primesfrom2to(n):
 
 class RollingDies:
     def __init__(self):
-        self.number_of_tossing_steps = 100
-        self.number_of_dies = 1
+        self.number_of_tossing_steps = 1000
+        self.number_of_dies = 3
         self.array_of_die_sum_result = []
         self._x_function_vector = None
         self._y_function_vector = None
@@ -125,7 +125,7 @@ class RollingDies:
         name_lst = ['X/Y']
         for val in self._y_function_vector:
             name_lst.append('Y={}'.format(val))
-        name_lst.append('X margin PMF')
+        name_lst.append('Y margin PMF')
 
         table = pt.PrettyTable(name_lst)
         xy_array = np.zeros((2, self.number_of_tossing_steps))
@@ -157,7 +157,7 @@ class RollingDies:
 
         self._join_cdf = np.cumsum(self._join_pmf, 1)
         val_lst = []
-        val_lst.append('Die margin PMF')
+        val_lst.append('X margin PMF')
         for val in np.round(np.sum(self._join_pmf, 0), 4):
             val_lst.append(val)
         val_lst.append(np.round(np.sum(self._join_pmf), 4))
@@ -170,10 +170,10 @@ class RollingDies:
     def show_joint_cdf(self):
         if self._join_pmf is None:
             self.show_joint_pdf()
-        name_lst = ['Coin/Die Sum']
+        name_lst = ['X/Y']
         for val in self._y_function_vector:
-            name_lst.append('sum={}'.format(val))
-        name_lst.append('Coin margin CDF')
+            name_lst.append('Y={}'.format(val))
+        name_lst.append('Y margin CDF')
 
         table = pt.PrettyTable(name_lst)
 
@@ -181,25 +181,15 @@ class RollingDies:
 
         for id_x in range(len_x):
             val_lst = []
-            txt_name = None
-            if np.max(self._x_function_vector) < 2:
-                if id_x == 0:
-                    txt_name = 'Tail'
-                if id_x == 1:
-                    txt_name = 'Head'
-            else:
-                if id_x == 0:
-                    txt_name = 'T'
-                if id_x > 0:
-                    txt_name = 'H' * (id_x + 1)
+            txt_name = 'X={}'.format(self._x_function_vector[id_x])
             val_lst.append(txt_name)
             for tmp_val in self._join_cdf[id_x, :]:
                 val_lst.append('{}'.format(np.round(tmp_val, 4)))
-            val_lst.append('Fcoin({}), marginal CDF'.format(txt_name))
+            val_lst.append('Fx({}), marginal CDF'.format(txt_name))
 
             table.add_row(val_lst)
-        table.title = 'Marginal CDFs for {} Coins and {} Deis. Number of tossing steps is: {}'.\
-            format(self.number_of_coins, self.number_of_dies, self.number_of_tossing_steps)
+        table.title = 'Marginal CDFs for {} Deis. Number of tossing steps is: {}'.\
+            format(self.number_of_dies, self.number_of_tossing_steps)
         print(table)
 
     def plot(self):
@@ -275,6 +265,6 @@ if __name__ == '__main__':
     obj.rolling()
     obj.show_results()
     obj.show_joint_pdf()
-    # obj.show_joint_cdf()
+    obj.show_joint_cdf()
     # obj.plot()
     print('end')
