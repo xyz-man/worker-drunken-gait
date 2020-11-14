@@ -192,72 +192,6 @@ class RollingDies:
             format(self.number_of_dies, self.number_of_tossing_steps)
         print(table)
 
-    def plot(self):
-        self.get_pmf_and_cdf()
-        if self._join_pmf is None:
-            self.show_joint_pdf()
-
-        y_pmf, y_cdf = self._marginal_pmf_x, self._marginal_cdf_x
-        x = self._x_function_vector
-
-        color = np.random.rand(3)
-        plt.plot(x, y_pmf, 'o',
-                 color=color,
-                 label='coin margin pmf',
-                 )
-
-        color = np.random.rand(3)
-        plt.plot(x, y_cdf, '+',
-                 color=color,
-                 label='coin margin cdf',
-                 markersize=12,
-                 )
-
-        y_pmf, y_cdf = self._marginal_pmf_y, self._marginal_cdf_y
-        x = self._y_function_vector
-
-        color = np.random.rand(3)
-        plt.plot(x, y_pmf, 'o',
-                 color=color,
-                 label='die margin pmf',
-                 )
-
-        color = np.random.rand(3)
-        plt.plot(x, y_cdf, 'x',
-                 color=color,
-                 label='die margin cdf',
-                 markersize=12,
-                 markeredgewidth=2
-                 )
-
-        y_1, y_2 = self._join_pmf[0, :], self._join_pmf[1, :]
-        x = self._y_function_vector
-
-        color = np.random.rand(3)
-        plt.plot(x, y_1, '1',
-                 color=color,
-                 label='die (Tail) pmf',
-                 markersize=10,
-                 markeredgewidth=2
-                 )
-
-        color = np.random.rand(3)
-        plt.plot(x, y_2, '4',
-                 color=color,
-                 label='die (Head) pmf',
-                 markersize=10,
-                 markeredgewidth=2
-                 )
-        plt.title('Task 18, 19, 20\nNumber of tossing coins is: {}\nNumber of tossing {} is: {}\n'
-                  'Number of tossing steps is: {}'.format(
-            self.number_of_coins,
-            self._die_class().name_plural,
-            self.number_of_dies,
-            self.number_of_tossing_steps))
-        plt.legend()
-        plt.grid(True)
-        plt.show()
-
 
 if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
@@ -266,5 +200,4 @@ if __name__ == '__main__':
     obj.show_results()
     obj.show_joint_pdf()
     obj.show_joint_cdf()
-    # obj.plot()
     print('end')
