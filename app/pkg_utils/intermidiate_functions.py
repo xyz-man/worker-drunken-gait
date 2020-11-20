@@ -33,13 +33,12 @@ except ImportError:
 # scipy.spatial.distance.cdist
 try:
   from scipy.spatial import distance
+  from scipy.stats import pearsonr
 except ImportError:
   print ("Trying to Install required module: scipy\n")
   os.system('python3 -m pip install scipy')
   from scipy.spatial import distance
-
-
-
+  from scipy.stats import pearsonr
 
 
 class BaseIntermediateFunction:
@@ -113,6 +112,55 @@ class BaseIntermediateFunction:
         if vector is not None:
             out = self.mean(np.power(vector, 2)) - self.mean(vector) ** 2
         return out
+
+    def covariance(self, vector_X=None, vector_Y=None):
+        out = None
+        if (vector_X is None) and (self._vector is not None):
+            vector_X = self._vector
+
+        if (vector_Y is None) and (self._vector is not None):
+            vector_Y = self._vector
+
+        if (vector_X is not None) and (vector_Y is not None):
+            if len(vector_X) == len(vector_Y):
+                if len(vector_X) > 1:
+                    mean_X = self.mean(vector_X)
+                    mean_Y = self.mean(vector_Y)
+                    out = np.sum( (vector_X - mean_X)*(vector_Y - mean_Y) ) / (len(vector_X) - 1)
+        return out
+
+    def pearson_correlation_coefficient(self, vector_X=None, vector_Y=None):
+        out = None
+        if (vector_X is None) and (self._vector is not None):
+            vector_X = self._vector
+
+        if (vector_Y is None) and (self._vector is not None):
+            vector_Y = self._vector
+
+        if (vector_X is not None) and (vector_Y is not None):
+            if len(vector_X) == len(vector_Y):
+                if len(vector_X) > 1:
+                    std_X = np.sqrt(self.covariance(vector_X, vector_X))
+                    std_Y = np.sqrt(self.covariance(vector_Y, vector_Y))
+                    out = self.covariance(vector_X, vector_Y) / (std_X * std_Y)
+        return out
+
+    def cosine_similarity(self, vector_X=None, vector_Y=None):
+        out = None
+        if (vector_X is None) and (self._vector is not None):
+            vector_X = self._vector
+
+        if (vector_Y is None) and (self._vector is not None):
+            vector_Y = self._vector
+
+        if (vector_X is not None) and (vector_Y is not None):
+            if len(vector_X) == len(vector_Y):
+                if len(vector_X) > 1:
+                    abs_X = np.sqrt(np.sum(vector_X * vector_X))
+                    abs_Y = np.sqrt(np.sum(vector_Y * vector_Y))
+                    out = np.sum(vector_X * vector_Y) / (abs_X * abs_Y)
+        return out
+
 
     @staticmethod
     def distance_from_1d_euclidean(u, v, w=None):
@@ -211,8 +259,8 @@ class BaseIntermediateFunction:
 if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
     obj = BaseIntermediateFunction()
-    print("mean: {}, np.mean: {}".format(obj.mean(), np.mean(obj.get_vector())))
-    print("variance: {}, np.var: {}".format(obj.variance(), np.var(obj.get_vector())))
+    print("Task #14| mean: {}, np.mean: {}".format(obj.mean(), np.mean(obj.get_vector())))
+    print("Task #15| variance: {}, np.var: {}".format(obj.variance(), np.var(obj.get_vector())))
     obj.plot()
     obj.show_distance_matrix()
     print(obj.distance_from_1d_euclidean([1, 1, 0], [0, 1, 0], [0.5, 0.5, 0]))
@@ -226,14 +274,25 @@ if __name__ == '__main__':
                                       [1, 1, 0],
                                       [1, 1, 1]]).T
     obj.get_distance()
-    print('Realization "Euclidean":')
+    print('Task #16| Realization "Euclidean":')
     obj.show_distance_matrix()
 
     obj.get_distance(dst_type='Manhattan')
-    print('Realization "Manhattan":')
+    print('Task #17| Realization "Manhattan":')
     obj.show_distance_matrix()
 
     a = obj.vector_of_x0.T
     b = obj.data_points_array.T
-    print('scipy realization "euclidean": {}'.format(np.round(distance.cdist(a, b, 'euclidean'), 3)))
-    print('scipy realization "manhattan": {}'.format(distance.cdist(a, b, 'cityblock')))
+    print('Task #16| scipy realization "euclidean": {}'.format(np.round(distance.cdist(a, b, 'euclidean'), 3)))
+    print('Task #17| scipy realization "manhattan": {}'.format(distance.cdist(a, b, 'cityblock')))
+
+    X = 20*np.random.randn(1000)+100
+    Y = X + 10*np.random.randn(1000)+50
+    print("Task #26| Cov[X,Y]: {}, np.cov: {}".format(obj.covariance(X, Y), np.cov(X, Y)[0, 1]))
+    cos_similarity = 1 - distance.cosine(X, Y)
+    print("Task #27a| Cosine similarity: {}, scipy: {}".format(
+        obj.cosine_similarity(X, Y), cos_similarity))
+    pearson_corr, _ = pearsonr(X, Y)
+    print("Task #27b| Pearson's correlation coefficient: {}, np.cov: {}".format(
+        obj.pearson_correlation_coefficient(X, Y), pearson_corr))
+

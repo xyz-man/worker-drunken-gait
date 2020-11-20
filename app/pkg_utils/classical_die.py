@@ -5,7 +5,7 @@
 '''
 import os
 import copy
-from app.pkg_utils.strange_die import (ClassicalDie,
+from pkg_utils.strange_die import (ClassicalDie,
                                        np,
                                        plt,
                                        pt,
@@ -196,6 +196,7 @@ class RollingDies:
 if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
     obj = RollingDies()
+    obj.number_of_dies = 4
     obj.rolling()
     obj.show_results()
     obj.show_joint_pdf()

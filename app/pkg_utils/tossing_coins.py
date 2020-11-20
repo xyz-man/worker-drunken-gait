@@ -102,7 +102,7 @@ class MultiCoin:
                  label='cdf',
                  markersize=12,
                  )
-        plt.title('Number of tossing coins is: {}\nNumber of tossing steps is: {}'.format(self.number_of_coins,
+        plt.title('Task #6\nNumber of tossing coins is: {}\nNumber of tossing steps is: {}'.format(self.number_of_coins,
                                                                                           self.number_of_tossing_steps))
         plt.legend()
         plt.show()
@@ -111,7 +111,7 @@ class MultiCoin:
 if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
     obj = MultiCoin()
-    obj.number_of_coins = 6
+    obj.number_of_coins = 2
     obj.tossing()
     obj.show_tossing_results()
     obj.plot()

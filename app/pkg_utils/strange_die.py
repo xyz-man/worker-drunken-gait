@@ -5,7 +5,7 @@
 '''
 # check and install needed modules
 import os
-from app.pkg_utils.tossing_coins import Coin
+from pkg_utils.tossing_coins import Coin
 
 # numpy
 try:
@@ -65,8 +65,8 @@ class ClassicalDie(TossingObject):
 class CoinWithTwoStrangeDie:
     def __init__(self):
         self.number_of_tossing_steps = 10000
-        self.number_of_coins = 1
-        self.number_of_dies = 2
+        self.number_of_coins = 3
+        self.number_of_dies = 4
         self.array_of_coins_side_result = []
         self.array_of_die_sum_result = []
         self._x_function_vector = None
@@ -322,6 +322,8 @@ class CoinWithTwoStrangeDie:
 if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
     obj = CoinWithTwoStrangeDie()
+    obj.number_of_coins = 1
+    obj.number_of_dies = 4
     obj.tossing_and_rolling()
     # obj.show_results()
     obj.show_joint_pdf()
