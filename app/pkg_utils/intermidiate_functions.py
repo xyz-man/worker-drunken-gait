@@ -293,6 +293,6 @@ if __name__ == '__main__':
     print("Task #27a| Cosine similarity: {}, scipy: {}".format(
         obj.cosine_similarity(X, Y), cos_similarity))
     pearson_corr, _ = pearsonr(X, Y)
-    print("Task #27b| Pearson's correlation coefficient: {}, np.cov: {}".format(
+    print("Task #27b| Pearson's correlation coefficient: {}, pearsonr: {}".format(
         obj.pearson_correlation_coefficient(X, Y), pearson_corr))
 
