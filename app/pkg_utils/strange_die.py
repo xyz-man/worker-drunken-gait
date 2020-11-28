@@ -323,7 +323,7 @@ if __name__ == '__main__':
     print('-> you run ', __file__, ' file in the main mode (Top-level script environment)')
     obj = CoinWithTwoStrangeDie()
     obj.number_of_coins = 1
-    obj.number_of_dies = 2
+    obj.number_of_dies = 8
     obj.tossing_and_rolling()
     # obj.show_results()
     obj.show_joint_pdf()

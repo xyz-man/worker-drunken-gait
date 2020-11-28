@@ -95,6 +95,26 @@ class BaseIntermediateFunction:
     def get_vector(self):
         return self._vector
 
+    def error(self, vector=None):
+        out = None
+        if (vector is None) and (self._vector is not None):
+            vector = self._vector
+
+        if vector is not None:
+            m_v = self.mean(vector)
+            out = np.sum(np.power(vector - m_v, 2)) / len(vector)
+        return out
+
+    def sample_std(self, vector=None):
+        out = None
+        if (vector is None) and (self._vector is not None):
+            vector = self._vector
+
+        if vector is not None:
+            m_v = self.mean(vector)
+            out = np.sqrt(np.sum(np.power(vector - m_v, 2)) / (len(vector) - 1))
+        return out
+
     def mean(self, vector=None):
         out = None
         if (vector is None) and (self._vector is not None):
